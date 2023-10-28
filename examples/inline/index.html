@@ -42,7 +42,6 @@
 			<in-counter count="0" label="Green" color="#CEFFCE">
 				<button style="color: ${'color'}">${'label'}: ${'count'}</button>
 				<script tl-effect>
-					console.log('counter effect');
 					const inCounter = this;
 					inCounter.shadowRoot.querySelector('button').addEventListener('click', () => {
 						const newCount = parseInt(inCounter.getAttribute('count')) + 1;
@@ -83,6 +82,7 @@
 				<form>
 					<input name="input" placeholder="New Item" autofill="false" />
 				</form>
+				<button id="select-all">Select All</button>
 				<todo-section></todo-section>
 				<script tl-effect>
 					const todoList = this;
@@ -103,6 +103,14 @@
 
 					addNewTodoItem('Example Initial Item');
 					addNewTodoItem('Learning Tram-Lite');
+				</script>
+				<script tl-effect>
+					// add event listener for selecting all checkboxes
+					const selectAllButton = this.shadowRoot.querySelector('button');
+					selectAllButton.addEventListener('click', () => {
+						const todoItems = this.shadowRoot.querySelectorAll('in-todoitem');
+						todoItems.forEach((todoItem) => todoItem.setAttribute('checked', ''));
+					});
 				</script>
 			</in-todolist>
 
